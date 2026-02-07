@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Sentinel Feature Request</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0f0f0f;
+      color: #ffffff;
+      padding: 16px;
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      background: #1e1e1e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      resize: none;
+    }
+    button {
+      margin-top: 12px;
+      width: 100%;
+      padding: 12px;
+      background: #4f8cff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>💡 Feature Request</h3>
+  <p>Tell us what feature you want in Sentinel.</p>
+
+  <textarea id="feature" placeholder="Type your idea here and please be specific..."></textarea>
+
+  <button onclick="submitFeature()">Submit</button>
+
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+
+    function submitFeature() {
+      const text = document.getElementById("feature").value.trim();
+
+      if (!text) {
+        tg.showAlert("Please write something first.");
+        return;
+      }
+
+      tg.sendData(JSON.stringify({
+        type: "feature_request",
+        text: text
+      }));
+
+      tg.close();
+    }
+  </script>
+</body>
+</html> 
